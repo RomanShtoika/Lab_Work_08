@@ -21,10 +21,11 @@ git clone https://github.com/RomanShtoika/Lab_Work_08
 
 Task_1: <br>
 
+![1](https://github.com/RomanShtoika/Lab_Work_08/assets/135036174/a9417a88-7ee0-439e-9692-bec3c1e12c43)
 
+Task_2: <br>
 
-
-
+![2](https://github.com/RomanShtoika/Lab_Work_08/assets/135036174/f19c4b8c-d13b-4d32-985e-f3a53c380359)
 
 # Support
 
