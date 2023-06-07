@@ -1,17 +1,67 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+import java.io.*;
+import java.util.Random;
+
+public class Exercise_1 {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        if (args.length < 4) {
+            System.out.println("Необхідно вказати ім'я файлу, нижню межу, верхню межу та кількість чисел у командному рядку.");
+            System.out.println("Формат команди для запису: java RandomNumberWriterReader write <ім'я_файлу> <нижня_межа> <верхня_межа> <кількість_чисел>");
+            System.out.println("Формат команди для читання: java RandomNumberWriterReader read <ім'я_файлу>");
+            return;
+        }
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        String operation = args[0];
+        String fileName = args[1];
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        if (operation.equals("write")) {
+            if (args.length < 5) {
+                System.out.println("Необхідно вказати нижню межу, верхню межу та кількість чисел у командному рядку.");
+                System.out.println("Формат команди для запису: java RandomNumberWriterReader write <ім'я_файлу> <нижня_межа> <верхня_межа> <кількість_чисел>");
+                return;
+            }
+
+            int lowerBound = Integer.parseInt(args[2]);
+            int upperBound = Integer.parseInt(args[3]);
+            int count = Integer.parseInt(args[4]);
+
+            try {
+                FileWriter fileWriter = new FileWriter(fileName, true);
+
+                Random random = new Random();
+                for (int i = 0; i < count; i++) {
+                    int randomNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+                    fileWriter.write(randomNumber + "\n");
+                }
+
+                fileWriter.close();
+                System.out.println("Дані успішно записані у файл " + fileName);
+            } catch (IOException e) {
+                System.out.println("Виникла помилка при записі у файл " + fileName);
+                e.printStackTrace();
+            }
+        } else if (operation.equals("read")) {
+            try {
+                FileReader fileReader = new FileReader(fileName);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+                String line;
+                System.out.println("Вміст файлу " + fileName + ":");
+                while ((line = bufferedReader.readLine()) != null) {
+                    System.out.println(line);
+                }
+
+                bufferedReader.close();
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Виникла помилка при читанні файлу " + fileName);
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Невідома операція: " + operation);
+            System.out.println("Доступні операції: write, read");
         }
     }
 }
+//write Roman.txt 1 10 5
+//read Roman.txt 1 10 5
+
